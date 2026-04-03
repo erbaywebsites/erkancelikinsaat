@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────────
+   ERKAN ÇELİK – Luxury Design System
+   Dark charcoal + warm gold palette
+───────────────────────────────────────────── */
+
+@layer base {
+  :root {
+    /* Surfaces */
+    --background:   24 15% 6%;          /* near-black warm dark */
+    --foreground:   40 25% 92%;         /* warm off-white */
+
+    --card:         24 12% 9%;
+    --card-foreground: 40 25% 92%;
+
+    --popover:      24 12% 9%;
+    --popover-foreground: 40 25% 92%;
+
+    /* Brand – Gold */
+    --primary:      42 65% 28%;         /* brand gold start: #775a19 */
+    --primary-foreground: 24 15% 6%;   /* dark on gold */
+    --primary-light: 39 48% 56%;       /* gradient end: #c5a059 */
+    --primary-dim:  42 35% 22%;        /* muted dark gold */
+
+    /* Secondary surfaces */
+    --secondary:    24 10% 14%;
+    --secondary-foreground: 40 25% 92%;
+
+    --muted:        24 8% 16%;
+    --muted-foreground: 40 15% 55%;
+
+    --accent:       43 65% 52%;
+    --accent-foreground: 24 15% 6%;
+
+    --destructive: 0 65% 50%;
+    --destructive-foreground: 40 25% 92%;
+
+    --border:       43 20% 22%;
+    --input:        24 10% 18%;
+    --ring:         43 65% 52%;
+
+    --radius: 0.25rem;
+
+    /* Gradients */
+    --gradient-gold: linear-gradient(135deg, #775a19 0%, #c5a059 100%);
+    --gradient-hero: linear-gradient(to bottom, hsl(24 15% 6% / 0.3) 0%, hsl(24 15% 6% / 0.65) 60%, hsl(24 15% 6% / 0.95) 100%);
+    --gradient-card: linear-gradient(160deg, hsl(24 12% 11%) 0%, hsl(24 10% 8%) 100%);
+    --gradient-section: linear-gradient(to bottom, hsl(24 15% 6%), hsl(24 12% 9%), hsl(24 15% 6%));
+
+    /* Shadows */
+    --shadow-gold: 0 4px 24px hsl(43 65% 52% / 0.25);
+    --shadow-card: 0 8px 40px hsl(0 0% 0% / 0.5);
+
+    /* Sidebar (keep minimal) */
+    --sidebar-background: 24 15% 6%;
+    --sidebar-foreground: 40 25% 92%;
+    --sidebar-primary: 43 65% 52%;
+    --sidebar-primary-foreground: 24 15% 6%;
+    --sidebar-accent: 24 10% 14%;
+    --sidebar-accent-foreground: 40 25% 92%;
+    --sidebar-border: 43 20% 22%;
+    --sidebar-ring: 43 65% 52%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.01em;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cormorant Garamond', serif;
+    letter-spacing: 0.02em;
+  }
+}
+
+/* ── Utility classes ────────────────────────── */
+@layer utilities {
+  .serif-headline {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    letter-spacing: 0.02em;
+  }
+
+  .text-gold {
+    color: hsl(var(--primary));
+  }
+  .text-gold-light {
+    color: hsl(var(--primary-light));
+  }
+  .bg-gold {
+    background: hsl(var(--primary));
+  }
+  .gradient-gold {
+    background: var(--gradient-gold);
+  }
+  .gradient-text {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .shadow-gold {
+    box-shadow: var(--shadow-gold);
+  }
+  .border-gold {
+    border-color: hsl(var(--primary));
+  }
+  .border-gold-dim {
+    border-color: hsl(var(--primary-dim));
+  }
+
+  /* Gold line divider */
+  .gold-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, hsl(var(--primary)), transparent);
+  }
+
+  /* Cinematic overlay for images */
+  .hero-overlay {
+    background: var(--gradient-hero);
+  }
+
+  /* Elegant hover effect for cards */
+  .luxury-card {
+    background: var(--gradient-card);
+    box-shadow: var(--shadow-card);
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                box-shadow 0.4s ease;
+  }
+  .luxury-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 60px hsl(0 0% 0% / 0.6), var(--shadow-gold);
+  }
+
+  /* Animated underline for nav */
+  .nav-link-gold::after {
+    content: '';
+    display: block;
+    height: 1px;
+    background: hsl(var(--primary));
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    transform-origin: left;
+  }
+  .nav-link-gold:hover::after {
+    transform: scaleX(1);
+  }
+
+  /* Section fade-in */
+  .fade-in-section {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .fade-in-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Scrollbar ─────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: hsl(var(--background)); }
+::-webkit-scrollbar-thumb { background: hsl(var(--primary-dim)); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: hsl(var(--primary)); }
