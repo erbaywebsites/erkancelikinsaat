@@ -1,3 +1,18 @@
-# Welcome to your Lovable project
+# Erkan Çelik Yapı — Erbay Sitesi
 
-TODO: Document your project here
+Vite + React ile hazırlanmış proje tanıtım sitesi.
+
+## Geliştirme
+
+```bash
+npm install
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build
+```
+
+Canlı site custom domain üzerinden yayınlanır: `https://erkancelikinsaat.com`
