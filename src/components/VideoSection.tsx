@@ -4,7 +4,8 @@ import tanitimVideo from "@/assets/tanitim.mp4";
 
 export default function VideoSection() {
   const localVideoSrc = tanitimVideo;
-  const ref    = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [visible, setVisible] = useState(false);
   const [playing, setPlaying] = useState(false);
 
@@ -17,7 +18,15 @@ export default function VideoSection() {
     return () => obs.disconnect();
   }, []);
 
-  const handlePlay = () => setPlaying(true);
+  const handlePlay = () => {
+    setPlaying(true);
+    const v = videoRef.current;
+    if (v) {
+      void v.play().catch(() => {
+        /* Mobil tarayıcılar bazen ilk karede reddeder; native kontroller görünür kalır */
+      });
+    }
+  };
 
   return (
     <section id="video" ref={ref} className="relative py-32 overflow-hidden">
@@ -44,46 +53,34 @@ export default function VideoSection() {
           className={`relative transition-all duration-1000 delay-300 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
         >
           <div className="relative aspect-video border border-gold-dim/40 overflow-hidden bg-card shadow-gold">
-            {playing ? (
-              <video
-                src={localVideoSrc}
-                className="w-full h-full"
-                controls
-                autoPlay
-                playsInline
-                preload="metadata"
-                title="Villa Tanıtım Filmi"
-                aria-label="Villa Tanıtım Filmi"
-              />
-            ) : (
-              <>
-                {/* Thumbnail */}
-                <img
-                  src={aerialBg}
-                  alt="Video Thumbnail"
-                  className="w-full h-full object-cover opacity-60"
-                  loading="lazy"
-                  width={1280}
-                  height={720}
-                />
-                <div className="absolute inset-0 bg-background/40 flex flex-col items-center justify-center gap-6">
-                  {/* Play button */}
-                  <button
-                    onClick={handlePlay}
-                    className="group relative w-20 h-20 rounded-full border-2 border-gold flex items-center justify-center hover:bg-gold/20 transition-all duration-300 shadow-gold"
-                  >
-                    <div className="w-0 h-0 border-t-[12px] border-t-transparent border-b-[12px] border-b-transparent border-l-[20px] border-l-gold ml-2 group-hover:border-l-gold-light transition-colors" />
-                    {/* Pulse ring */}
-                    <div className="absolute inset-0 rounded-full border border-gold/30 scale-125 animate-ping" />
-                  </button>
-                  <p className="font-sans text-xs tracking-[0.3em] uppercase text-foreground/60">
-                    Tanıtım Filmini İzle
-                  </p>
-                  <p className="font-sans text-[10px] text-muted-foreground">
-                    Videoyu başlatmak için tıklayın
-                  </p>
-                </div>
-              </>
+            <video
+              ref={videoRef}
+              src={localVideoSrc}
+              className="w-full h-full object-cover"
+              controls={playing}
+              playsInline
+              poster={aerialBg}
+              preload={visible ? "auto" : "metadata"}
+              title="Villa Tanıtım Filmi"
+              aria-label="Villa Tanıtım Filmi"
+            />
+            {!playing && (
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-6 bg-background/40">
+                <button
+                  type="button"
+                  onClick={handlePlay}
+                  className="group relative z-10 w-20 h-20 rounded-full border-2 border-gold flex items-center justify-center hover:bg-gold/20 transition-all duration-300 shadow-gold"
+                >
+                  <div className="w-0 h-0 border-t-[12px] border-t-transparent border-b-[12px] border-b-transparent border-l-[20px] border-l-gold ml-2 group-hover:border-l-gold-light transition-colors" />
+                  <div className="absolute inset-0 rounded-full border border-gold/30 scale-125 animate-ping" />
+                </button>
+                <p className="relative z-10 font-sans text-xs tracking-[0.3em] uppercase text-foreground/60">
+                  Tanıtım Filmini İzle
+                </p>
+                <p className="relative z-10 font-sans text-[10px] text-muted-foreground">
+                  Videoyu başlatmak için tıklayın
+                </p>
+              </div>
             )}
           </div>
 
