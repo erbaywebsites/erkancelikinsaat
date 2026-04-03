@@ -1,6 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 
+const MAX = { name: 120, phone: 32, email: 254, message: 4000 } as const;
+
+function normalizeField(s: string, max: number): string {
+  return s.replace(/\s+/g, " ").trim().slice(0, max);
+}
+
+function isValidEmail(email: string): boolean {
+  if (email.length > MAX.email) return false;
+  // Practical RFC 5322–lite-ish check; blocks obvious header-injection and garbage
+  const re =
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+  return re.test(email);
+}
+
 export default function ContactSection() {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -8,6 +22,7 @@ export default function ContactSection() {
   const [isSending, setIsSending] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [form, setForm] = useState({ name: "", phone: "", email: "", message: "" });
+  const [honeypot, setHoneypot] = useState("");
 
   useEffect(() => {
     const obs = new IntersectionObserver(
@@ -26,6 +41,25 @@ export default function ContactSection() {
     e.preventDefault();
     setErrorMessage("");
 
+    if (honeypot.trim() !== "") {
+      setSubmitted(true);
+      return;
+    }
+
+    const name = normalizeField(form.name, MAX.name);
+    const phone = normalizeField(form.phone, MAX.phone);
+    const email = normalizeField(form.email, MAX.email);
+    const message = normalizeField(form.message, MAX.message);
+
+    if (!name || !phone || !email || !message) {
+      setErrorMessage("Lütfen tüm zorunlu alanları doldurun.");
+      return;
+    }
+    if (!isValidEmail(email)) {
+      setErrorMessage("Geçerli bir e-posta adresi girin.");
+      return;
+    }
+
     const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
     const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
     const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
@@ -41,10 +75,10 @@ export default function ContactSection() {
         serviceId,
         templateId,
         {
-          from_name: form.name,
-          from_phone: form.phone,
-          reply_to: form.email,
-          message: form.message,
+          from_name: name,
+          from_phone: phone,
+          reply_to: email,
+          message,
         },
         { publicKey }
       );
@@ -164,12 +198,24 @@ export default function ContactSection() {
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
-                {[
-                  { name: "name",  label: "Ad Soyad",   type: "text",  placeholder: "Adınız ve soyadınız" },
-                  { name: "phone", label: "Telefon",     type: "tel",   placeholder: "+90 5XX XXX XX XX"   },
-                  { name: "email", label: "E-posta",     type: "email", placeholder: "ornek@email.com"     },
-                ].map((field) => (
+              <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+                <input
+                  type="text"
+                  name="website"
+                  value={honeypot}
+                  onChange={(e) => setHoneypot(e.target.value)}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  className="absolute left-[-9999px] h-0 w-0 opacity-0 pointer-events-none"
+                />
+                {(
+                  [
+                    { name: "name" as const, label: "Ad Soyad", type: "text", placeholder: "Adınız ve soyadınız", maxLength: MAX.name },
+                    { name: "phone" as const, label: "Telefon", type: "tel", placeholder: "+90 5XX XXX XX XX", maxLength: MAX.phone },
+                    { name: "email" as const, label: "E-posta", type: "email", placeholder: "ornek@email.com", maxLength: MAX.email },
+                  ] as const
+                ).map((field) => (
                   <div key={field.name}>
                     <label className="font-sans text-[10px] tracking-[0.25em] uppercase text-gold block mb-2">
                       {field.label}
@@ -177,10 +223,11 @@ export default function ContactSection() {
                     <input
                       type={field.type}
                       name={field.name}
-                      value={(form as any)[field.name]}
+                      value={form[field.name]}
                       onChange={handleChange}
                       placeholder={field.placeholder}
                       required
+                      maxLength={field.maxLength}
                       className="w-full bg-background border border-gold-dim/40 px-4 py-3 text-foreground font-sans text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:border-gold transition-colors"
                     />
                   </div>
@@ -196,6 +243,8 @@ export default function ContactSection() {
                     onChange={handleChange}
                     placeholder="Villa, fiyatlandırma veya yerinde gezi hakkında sorularınızı yazın..."
                     rows={4}
+                    required
+                    maxLength={MAX.message}
                     className="w-full bg-background border border-gold-dim/40 px-4 py-3 text-foreground font-sans text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:border-gold transition-colors resize-none"
                   />
                 </div>
