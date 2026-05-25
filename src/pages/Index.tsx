@@ -96,7 +96,7 @@ export default function Index() {
             className={`font-sans text-sm sm:text-base tracking-[0.15em] text-foreground/80 max-w-xl md:max-w-2xl mx-auto mb-12 uppercase transition-all duration-1000 delay-[900ms] ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
           >
-            Lüleburgaz'da en lüks, estetik ve sağlam yapıları inşa ediyoruz. Seçkin projelerimizle hayatınıza değer katın.
+            Trakya'da en lüks, estetik ve sağlam yapıları inşa ediyoruz. Seçkin projelerimizle hayatınıza değer katın.
           </p>
 
           {/* CTA buttons */}
