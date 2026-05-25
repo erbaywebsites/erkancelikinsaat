@@ -196,65 +196,76 @@ export default function Index() {
 
           {/* Projects Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {projects.map((project, i) => (
-              <div
-                key={project.id}
-                className={`luxury-card flex flex-col group overflow-hidden border border-gold-dim/30 transition-all duration-1000 ${projectsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-                  }`}
-                style={{ transitionDelay: `${i * 150}ms` }}
-              >
-                {/* Image Container */}
-                <div className="relative aspect-[4/3] w-full overflow-hidden">
-                  <img
-                    src={project.heroImage}
-                    alt={project.name}
-                    loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-80" />
+            {projects.map((project, i) => {
+              const cardThemeClass =
+                project.id === "erkancelik-insaat"
+                  ? "theme-erbay-sitesi"
+                  : project.id === "durak-mahallesi"
+                  ? "theme-durak-mahallesi"
+                  : project.id === "golden-odris-home"
+                  ? "theme-golden-odris-home"
+                  : "";
 
-                  {/* Badge */}
-                  <div className="absolute top-4 left-4">
-                    <span className="font-sans text-[9px] tracking-[0.2em] uppercase px-3 py-1.5 bg-gold text-primary-foreground font-semibold">
-                      {project.badge}
-                    </span>
+              return (
+                <div
+                  key={project.id}
+                  className={`luxury-card flex flex-col group overflow-hidden border border-gold-dim/30 transition-all duration-1000 ${cardThemeClass} ${projectsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+                    }`}
+                  style={{ transitionDelay: `${i * 150}ms` }}
+                >
+                  {/* Image Container */}
+                  <div className="relative aspect-[4/3] w-full overflow-hidden">
+                    <img
+                      src={project.heroImage}
+                      alt={project.name}
+                      loading="lazy"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-80" />
+
+                    {/* Badge */}
+                    <div className="absolute top-4 left-4">
+                      <span className="font-sans text-[9px] tracking-[0.2em] uppercase px-3 py-1.5 bg-gold text-primary-foreground font-semibold">
+                        {project.badge}
+                      </span>
+                    </div>
+
+                    {/* Delivery date badge */}
+                    <div className="absolute top-4 right-4">
+                      <span className="font-sans text-[9px] tracking-[0.2em] uppercase px-3 py-1.5 bg-background/80 border border-gold-dim/40 text-gold backdrop-blur-sm">
+                        Teslim: {project.deliveryYear}
+                      </span>
+                    </div>
                   </div>
 
-                  {/* Delivery date badge */}
-                  <div className="absolute top-4 right-4">
-                    <span className="font-sans text-[9px] tracking-[0.2em] uppercase px-3 py-1.5 bg-background/80 border border-gold-dim/40 text-gold backdrop-blur-sm">
-                      Teslim: {project.deliveryYear}
-                    </span>
+                  {/* Content Container */}
+                  <div className="p-8 flex flex-col flex-grow bg-card/60">
+                    <div className="flex flex-col gap-2 mb-3.5">
+                      <span className="font-sans text-[9px] tracking-[0.25em] uppercase text-gold font-medium">
+                        {project.location}
+                      </span>
+                      <span className="font-sans text-[10px] tracking-[0.2em] uppercase text-gold-light font-bold bg-gold/10 px-3 py-1.5 rounded w-fit border border-gold/20 backdrop-blur-sm shadow-[0_2px_10px_rgba(119,90,25,0.1)]">
+                        {project.eyebrow.replace(/—/g, "").trim()}
+                      </span>
+                    </div>
+                    <h3 className="font-serif text-3xl font-light text-foreground mb-4 group-hover:text-gold transition-colors">
+                      {project.name}
+                    </h3>
+                    <div className="gold-divider w-12 mb-5 group-hover:w-24 transition-all duration-500" />
+                    <p className="font-sans text-sm text-muted-foreground/80 leading-relaxed mb-8 flex-grow">
+                      {project.description}
+                    </p>
+
+                    <Link
+                      to={`/proje/${project.id}`}
+                      className="w-full text-center font-sans text-[10px] tracking-[0.25em] uppercase py-3.5 border border-gold text-gold hover:bg-gold hover:text-primary-foreground transition-all duration-300"
+                    >
+                      PROJEYİ İNCELE
+                    </Link>
                   </div>
                 </div>
-
-                {/* Content Container */}
-                <div className="p-8 flex flex-col flex-grow bg-card/60">
-                  <div className="flex flex-col gap-2 mb-3.5">
-                    <span className="font-sans text-[9px] tracking-[0.25em] uppercase text-gold font-medium">
-                      {project.location}
-                    </span>
-                    <span className="font-sans text-[10px] tracking-[0.2em] uppercase text-gold-light font-bold bg-gold/10 px-3 py-1.5 rounded w-fit border border-gold/20 backdrop-blur-sm shadow-[0_2px_10px_rgba(119,90,25,0.1)]">
-                      {project.eyebrow.replace(/—/g, "").trim()}
-                    </span>
-                  </div>
-                  <h3 className="font-serif text-3xl font-light text-foreground mb-4 group-hover:text-gold transition-colors">
-                    {project.name}
-                  </h3>
-                  <div className="gold-divider w-12 mb-5 group-hover:w-24 transition-all duration-500" />
-                  <p className="font-sans text-sm text-muted-foreground/80 leading-relaxed mb-8 flex-grow">
-                    {project.description}
-                  </p>
-
-                  <Link
-                    to={`/proje/${project.id}`}
-                    className="w-full text-center font-sans text-[10px] tracking-[0.25em] uppercase py-3.5 border border-gold text-gold hover:bg-gold hover:text-primary-foreground transition-all duration-300"
-                  >
-                    PROJEYİ İNCELE
-                  </Link>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

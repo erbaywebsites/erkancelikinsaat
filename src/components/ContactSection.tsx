@@ -248,7 +248,7 @@ export default function ContactSection({ projectData, isComingSoon }: ContactSec
                     name="message"
                     value={form.message}
                     onChange={handleChange}
-                    placeholder={isComingSoon ? "Trend Palas Konakları projemiz hakkında ön talep veya lansman tarihleri için sorularınızı yazın..." : "Villa, fiyatlandırma veya yerinde gezi hakkında sorularınızı yazın..."}
+                    placeholder={isComingSoon ? "Golden Odris Home projemiz hakkında ön talep veya lansman tarihleri için sorularınızı yazın..." : "Villa, fiyatlandırma veya yerinde gezi hakkında sorularınızı yazın..."}
                     rows={4}
                     required
                     maxLength={MAX.message}

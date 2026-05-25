@@ -29,8 +29,8 @@ export default function ProjectDetail() {
       ? "theme-erbay-sitesi"
       : projectData.id === "durak-mahallesi"
       ? "theme-durak-mahallesi"
-      : projectData.id === "trend-palas"
-      ? "theme-trend-palas"
+      : projectData.id === "golden-odris-home"
+      ? "theme-golden-odris-home"
       : "";
 
   return (

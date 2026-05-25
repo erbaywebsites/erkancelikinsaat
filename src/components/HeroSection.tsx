@@ -19,7 +19,7 @@ export default function HeroSection({ projectData, isComingSoon }: HeroSectionPr
     <section
       id="hero"
       ref={ref}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 pb-16"
     >
       {/* Background Image */}
       <div

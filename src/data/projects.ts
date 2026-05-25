@@ -75,8 +75,8 @@ import loftAer2 from "@/assets/durak-mahallesi/aerial-2.jpg";
 import loftAer3 from "@/assets/durak-mahallesi/aerial-3.jpg";
 import loftVideo from "@/assets/durak-mahallesi/tanitim.mp4";
 
-// Trend Palas Imports
-import trendComingSoon from "@/assets/brand/trend-palas-coming-soon.png";
+// Golden Odris Home Imports
+import goldenOdrisComingSoon from "@/assets/brand/golden-odris-home-coming-soon.png";
 
 export interface ProjectFeature {
   title: string;
@@ -304,18 +304,18 @@ export const projects: ProjectData[] = [
   {
     id: "golden-odris-home",
     name: "Golden Odris Home",
-    eyebrow: "— Erkan Çelik İnşaat & GAYRİMENKUL —",
+    eyebrow: "— ERKAN ÇELİK İNŞAAT & GAYRİMENKUL —",
     headline: "Golden Odris Home",
     subHeadline: "Şehrin Kalbinde",
     description: "BABAESKİ'DE MERKEZDE PRESTİJLİ BİR YAŞAM · ÇOK YAKINDA SİZLERLE",
-    heroImage: trendComingSoon,
+    heroImage: goldenOdrisComingSoon,
     badge: "Yakında Gelecek",
     location: "Babaeski",
     deliveryYear: "Yakında",
     stats: [],
     features: [],
     images: [],
-    contactText: "Ba projemiz hakkında lansman öncesi bilgi almak, ön talep oluşturmak ve detaylı bilgi edinmek için bizimle iletişime geçin.",
+    contactText: "Babaeski Golden Odris Home projemiz hakkında lansman öncesi bilgi almak, ön talep oluşturmak ve detaylı bilgi edinmek için bizimle iletişime geçin.",
     isComingSoon: true,
   },
 ];
