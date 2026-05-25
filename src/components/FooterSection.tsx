@@ -1,4 +1,4 @@
-import ecLogo from "@/assets/ec-logo.png";
+import ecLogo from "@/assets/brand/ec-logo.png";
 
 export default function FooterSection() {
   return (

@@ -1,9 +1,16 @@
 import { useEffect, useRef, useState } from "react";
-import aerialBg from "@/assets/villa-aerial-1.jpg";
-import tanitimVideo from "@/assets/tanitim.mp4";
+import { ProjectData } from "@/data/projects";
 
-export default function VideoSection() {
-  const localVideoSrc = tanitimVideo;
+interface VideoSectionProps {
+  projectData: ProjectData;
+}
+
+export default function VideoSection({ projectData }: VideoSectionProps) {
+  // If no video is specified, do not render this section
+  if (!projectData.videoSrc) {
+    return null;
+  }
+
   const ref = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [visible, setVisible] = useState(false);
@@ -11,7 +18,9 @@ export default function VideoSection() {
 
   useEffect(() => {
     const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) setVisible(true); },
+      ([e]) => {
+        if (e.isIntersecting) setVisible(true);
+      },
       { threshold: 0.1 }
     );
     if (ref.current) obs.observe(ref.current);
@@ -33,13 +42,17 @@ export default function VideoSection() {
       {/* Bg */}
       <div
         className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${aerialBg})` }}
+        style={{ backgroundImage: `url(${projectData.videoPoster || projectData.heroImage})` }}
       />
       <div className="absolute inset-0 bg-background/85" />
 
       <div className="relative z-10 max-w-5xl mx-auto px-6">
         {/* Header */}
-        <div className={`text-center mb-16 transition-all duration-1000 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+        <div
+          className={`text-center mb-16 transition-all duration-1000 ${
+            visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
           <p className="font-sans text-[10px] tracking-[0.5em] uppercase text-gold mb-4">— Tanıtım Filmi —</p>
           <h2 className="font-serif text-5xl sm:text-6xl font-light text-foreground mb-6">
             Projeyi<br />
@@ -50,19 +63,21 @@ export default function VideoSection() {
 
         {/* Video Player */}
         <div
-          className={`relative transition-all duration-1000 delay-300 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+          className={`relative transition-all duration-1000 delay-300 ${
+            visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
         >
           <div className="relative aspect-video border border-gold-dim/40 overflow-hidden bg-card shadow-gold">
             <video
               ref={videoRef}
-              src={localVideoSrc}
+              src={projectData.videoSrc}
               className="w-full h-full object-cover"
               controls={playing}
               playsInline
-              poster={aerialBg}
+              poster={projectData.videoPoster || projectData.heroImage}
               preload={visible ? "auto" : "metadata"}
-              title="Villa Tanıtım Filmi"
-              aria-label="Villa Tanıtım Filmi"
+              title="Proje Tanıtım Filmi"
+              aria-label="Proje Tanıtım Filmi"
             />
             {!playing && (
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-6 bg-background/40">
@@ -92,11 +107,15 @@ export default function VideoSection() {
         </div>
 
         {/* Caption */}
-        <p
-          className={`text-center font-sans text-sm text-muted-foreground mt-8 tracking-wide max-w-2xl mx-auto transition-all duration-1000 delay-500 ${visible ? "opacity-100" : "opacity-0"}`}
-        >
-          Yaklaşık 1 dakikalık tanıtım filmimizde proje alanını, villa tasarımlarını ve çevre düzenlemesini keşfedin.
-        </p>
+        {projectData.videoDescription && (
+          <p
+            className={`text-center font-sans text-sm text-muted-foreground mt-8 tracking-wide max-w-2xl mx-auto transition-all duration-1000 delay-500 ${
+              visible ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            {projectData.videoDescription}
+          </p>
+        )}
       </div>
     </section>
   );

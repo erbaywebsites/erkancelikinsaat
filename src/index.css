@@ -66,6 +66,90 @@
     --sidebar-border: 43 20% 22%;
     --sidebar-ring: 43 65% 52%;
   }
+
+  .theme-erbay-sitesi {
+    /* Signature rich luxury gold & warm dark charcoal (default) */
+    --background: 24 15% 6%;
+    --foreground: 40 25% 92%;
+    --card: 24 12% 9%;
+    --card-foreground: 40 25% 92%;
+    --popover: 24 12% 9%;
+    --popover-foreground: 40 25% 92%;
+    --primary: 42 65% 28%;
+    --primary-foreground: 24 15% 6%;
+    --primary-light: 39 48% 56%;
+    --primary-dim: 42 35% 22%;
+    --secondary: 24 10% 14%;
+    --secondary-foreground: 40 25% 92%;
+    --muted: 24 8% 16%;
+    --muted-foreground: 40 15% 55%;
+    --accent: 43 65% 52%;
+    --accent-foreground: 24 15% 6%;
+    --border: 43 20% 22%;
+    --input: 24 10% 18%;
+    --ring: 43 65% 52%;
+    --gradient-gold: linear-gradient(135deg, #775a19 0%, #c5a059 100%);
+    --gradient-hero: linear-gradient(to bottom, hsl(24 15% 6% / 0.3) 0%, hsl(24 15% 6% / 0.65) 60%, hsl(24 15% 6% / 0.95) 100%);
+    --gradient-card: linear-gradient(160deg, hsl(24 12% 11%) 0%, hsl(24 10% 8%) 100%);
+    --gradient-section: linear-gradient(to bottom, hsl(24 15% 6%), hsl(24 12% 9%), hsl(24 15% 6%));
+    --shadow-gold: 0 4px 24px hsl(43 65% 52% / 0.25);
+  }
+
+  .theme-durak-mahallesi {
+    /* Sleek high-end urban steel-blue, cool slate & titanium-silver */
+    --background: 220 18% 7%;
+    --foreground: 210 20% 93%;
+    --card: 220 14% 10%;
+    --card-foreground: 210 20% 93%;
+    --popover: 220 14% 10%;
+    --popover-foreground: 210 20% 93%;
+    --primary: 207 72% 35%;
+    --primary-foreground: 220 18% 7%;
+    --primary-light: 200 45% 60%;
+    --primary-dim: 207 35% 20%;
+    --secondary: 220 12% 14%;
+    --secondary-foreground: 210 20% 93%;
+    --muted: 220 10% 16%;
+    --muted-foreground: 210 12% 58%;
+    --accent: 194 80% 50%;
+    --accent-foreground: 220 18% 7%;
+    --border: 207 30% 20%;
+    --input: 220 12% 16%;
+    --ring: 194 80% 50%;
+    --gradient-gold: linear-gradient(135deg, #1a5f96 0%, #6ca0c0 100%);
+    --gradient-hero: linear-gradient(to bottom, hsl(220 18% 7% / 0.3) 0%, hsl(220 18% 7% / 0.65) 60%, hsl(220 18% 7% / 0.95) 100%);
+    --gradient-card: linear-gradient(160deg, hsl(220 14% 12%) 0%, hsl(220 14% 9%) 100%);
+    --gradient-section: linear-gradient(to bottom, hsl(220 18% 7%), hsl(220 14% 10%), hsl(220 18% 7%));
+    --shadow-gold: 0 4px 24px hsl(194 80% 50% / 0.2);
+  }
+
+  .theme-trend-palas {
+    /* Imperial forest green, deep jade & champagne bronze-gold */
+    --background: 145 22% 6%;
+    --foreground: 70 20% 92%;
+    --card: 145 16% 9%;
+    --card-foreground: 70 20% 92%;
+    --popover: 145 16% 9%;
+    --popover-foreground: 70 20% 92%;
+    --primary: 152 65% 20%;
+    --primary-foreground: 145 22% 6%;
+    --primary-light: 65 35% 65%;
+    --primary-dim: 152 40% 13%;
+    --secondary: 145 14% 13%;
+    --secondary-foreground: 70 20% 92%;
+    --muted: 145 12% 16%;
+    --muted-foreground: 70 12% 58%;
+    --accent: 145 55% 42%;
+    --accent-foreground: 145 22% 6%;
+    --border: 152 25% 18%;
+    --input: 145 15% 14%;
+    --ring: 145 55% 42%;
+    --gradient-gold: linear-gradient(135deg, #125330 0%, #c3b584 100%);
+    --gradient-hero: linear-gradient(to bottom, hsl(145 22% 6% / 0.3) 0%, hsl(145 22% 6% / 0.65) 60%, hsl(145 22% 6% / 0.95) 100%);
+    --gradient-card: linear-gradient(160deg, hsl(145 16% 11%) 0%, hsl(145 16% 8%) 100%);
+    --gradient-section: linear-gradient(to bottom, hsl(145 22% 6%), hsl(145 16% 9%), hsl(145 22% 6%));
+    --shadow-gold: 0 4px 24px hsl(145 55% 42% / 0.18);
+  }
 }
 
 @layer base {

@@ -1,7 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import heroBg from "@/assets/villa-exterior-3.jpg";
+import { ProjectData } from "@/data/projects";
 
-export default function HeroSection() {
+interface HeroSectionProps {
+  projectData: ProjectData;
+  isComingSoon?: boolean;
+}
+
+export default function HeroSection({ projectData, isComingSoon }: HeroSectionProps) {
   const [loaded, setLoaded] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -20,14 +25,14 @@ export default function HeroSection() {
       <div
         className="absolute inset-0 bg-cover bg-center scale-105 transition-transform duration-[8000ms]"
         style={{
-          backgroundImage: `url(${heroBg})`,
+          backgroundImage: `url(${projectData.heroImage})`,
           transform: loaded ? "scale(1)" : "scale(1.05)",
         }}
       />
 
       {/* Multi-layer overlay */}
       <div className="absolute inset-0 hero-overlay" />
-      <div className="absolute inset-0 bg-background/20" />
+      <div className="absolute inset-0 bg-background/55" />
 
       {/* Decorative side lines */}
       <div className="absolute left-8 top-1/2 -translate-y-1/2 hidden lg:flex flex-col items-center gap-3 opacity-50">
@@ -44,13 +49,15 @@ export default function HeroSection() {
       {/* Content */}
       <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
         {/* Eyebrow */}
-        <p
-          className={`font-sans text-[10px] tracking-[0.5em] uppercase text-gold-light drop-shadow-[0_1px_4px_rgba(0,0,0,0.45)] mb-6 transition-all duration-1000 delay-300 ${
+        <div
+          className={`flex justify-center mb-6 transition-all duration-1000 delay-300 ${
             loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          — Erkan Çelik İnşaat &amp; GAYRİMENKUL —
-        </p>
+          <span className="font-sans text-[10px] sm:text-xs tracking-[0.25em] uppercase text-gold-light font-bold bg-gold/15 border border-gold/30 px-5 py-2 rounded shadow-gold/15 backdrop-blur-sm">
+            {projectData.eyebrow.replace(/—/g, "").trim()}
+          </span>
+        </div>
 
         {/* Title */}
         <h1
@@ -59,11 +66,13 @@ export default function HeroSection() {
           }`}
         >
           <span className="block font-sans text-sm sm:text-base md:text-lg lg:text-xl tracking-[0.35em] uppercase text-gold-light mb-2 md:mb-3 drop-shadow-[0_1px_4px_rgba(0,0,0,0.45)]">
-            Lüleburgaz
+            {projectData.location}
           </span>
-          Erbay Sitesi
+          {projectData.headline}
           <br />
-          <span className="gradient-text text-[0.8em] font-normal italic inline-block translate-y-1 drop-shadow-[0_1px_4px_rgba(0,0,0,0.35)]">Elit Villalar</span>
+          <span className="gradient-text text-[0.8em] font-normal italic inline-block translate-y-1 drop-shadow-[0_1px_4px_rgba(0,0,0,0.35)]">
+            {projectData.subHeadline}
+          </span>
         </h1>
 
         {/* Gold divider */}
@@ -79,7 +88,7 @@ export default function HeroSection() {
             loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          LÜLEBURGAZ'DA DOĞAYLA İÇ İÇE, MERKEZE 10 DAKİKA · Özel havuz · Garaj · Bahçe
+          {projectData.description}
         </p>
 
         {/* CTA buttons */}
@@ -88,21 +97,34 @@ export default function HeroSection() {
             loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          <a
-            href="#gallery"
-            className="group font-sans text-xs tracking-[0.25em] uppercase px-10 py-4 gradient-gold text-primary-foreground hover:opacity-95 transition-all duration-300 shadow-gold"
-          >
-            GÖRSELLERİ Keşfet
-          </a>
-          <a
-            href="#video"
-            className="group font-sans text-xs tracking-[0.25em] uppercase px-10 py-4 border border-gold/60 text-gold hover:border-gold hover:bg-gold/10 transition-all duration-300 flex items-center gap-3"
-          >
-            <span className="w-5 h-5 rounded-full border border-gold flex items-center justify-center">
-              <span className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[7px] border-l-gold ml-0.5" />
-            </span>
-            TANITIM FİLMİ
-          </a>
+          {isComingSoon ? (
+            <a
+              href="#contact"
+              className="group font-sans text-xs tracking-[0.25em] uppercase px-10 py-4 gradient-gold text-primary-foreground hover:opacity-95 transition-all duration-300 shadow-gold"
+            >
+              ÖN TALEP OLUŞTUR
+            </a>
+          ) : (
+            <>
+              <a
+                href="#gallery"
+                className="group font-sans text-xs tracking-[0.25em] uppercase px-10 py-4 gradient-gold text-primary-foreground hover:opacity-95 transition-all duration-300 shadow-gold"
+              >
+                GÖRSELLERİ Keşfet
+              </a>
+              {projectData.videoSrc && (
+                <a
+                  href="#video"
+                  className="group font-sans text-xs tracking-[0.25em] uppercase px-10 py-4 border border-gold/60 text-gold hover:border-gold hover:bg-gold/10 transition-all duration-300 flex items-center gap-3"
+                >
+                  <span className="w-5 h-5 rounded-full border border-gold flex items-center justify-center">
+                    <span className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[7px] border-l-gold ml-0.5" />
+                  </span>
+                  TANITIM FİLMİ
+                </a>
+              )}
+            </>
+          )}
         </div>
       </div>
 

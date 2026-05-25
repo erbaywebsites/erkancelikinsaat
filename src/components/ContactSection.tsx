@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
+import { ProjectData } from "@/data/projects";
 
 const MAX = { name: 120, phone: 32, email: 254, message: 4000 } as const;
 
@@ -15,7 +16,12 @@ function isValidEmail(email: string): boolean {
   return re.test(email);
 }
 
-export default function ContactSection() {
+interface ContactSectionProps {
+  projectData?: ProjectData;
+  isComingSoon?: boolean;
+}
+
+export default function ContactSection({ projectData, isComingSoon }: ContactSectionProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -23,6 +29,7 @@ export default function ContactSection() {
   const [errorMessage, setErrorMessage] = useState("");
   const [form, setForm] = useState({ name: "", phone: "", email: "", message: "" });
   const [honeypot, setHoneypot] = useState("");
+
 
   useEffect(() => {
     const obs = new IntersectionObserver(
@@ -113,7 +120,7 @@ export default function ContactSection() {
             </h3>
             <div className="gold-divider w-16 mb-8" />
             <p className="font-sans text-sm leading-relaxed text-muted-foreground mb-10">
-              Projeye dair tüm sorularınızı yanıtlamak, yerinde gezi ayarlamak ve fiyatlandırma bilgisi almak için bizimle iletişime geçin. Satış ekibimiz size özel çözümler sunmak için hazır.
+              {projectData?.contactText || "Projeye dair tüm sorularınızı yanıtlamak, yerinde gezi ayarlamak ve fiyatlandırma bilgisi almak için bizimle iletişime geçin. Satış ekibimiz size özel çözümler sunmak için hazır."}
             </p>
 
             <div className="space-y-6">
@@ -241,7 +248,7 @@ export default function ContactSection() {
                     name="message"
                     value={form.message}
                     onChange={handleChange}
-                    placeholder="Villa, fiyatlandırma veya yerinde gezi hakkında sorularınızı yazın..."
+                    placeholder={isComingSoon ? "Trend Palas Konakları projemiz hakkında ön talep veya lansman tarihleri için sorularınızı yazın..." : "Villa, fiyatlandırma veya yerinde gezi hakkında sorularınızı yazın..."}
                     rows={4}
                     required
                     maxLength={MAX.message}
@@ -254,7 +261,7 @@ export default function ContactSection() {
                   disabled={isSending}
                   className="w-full font-sans text-xs tracking-[0.3em] uppercase py-4 bg-gold text-primary-foreground hover:bg-gold-light transition-all duration-300 shadow-gold mt-2"
                 >
-                  {isSending ? "Gönderiliyor..." : "Bilgi Talebi Gönder"}
+                  {isSending ? "Gönderiliyor..." : (isComingSoon ? "Ön Talep Gönder" : "Bilgi Talebi Gönder")}
                 </button>
                 {errorMessage && (
                   <p className="font-sans text-xs text-destructive">{errorMessage}</p>
