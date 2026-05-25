@@ -67,20 +67,18 @@ export default function Index() {
         <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
           {/* Eyebrow */}
           <p
-            className={`font-sans text-[10px] tracking-[0.5em] uppercase text-gold-light drop-shadow-[0_1px_4px_rgba(0,0,0,0.45)] mb-6 transition-all duration-1000 delay-300 ${
-              loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-            }`}
+            className={`font-sans text-[10px] tracking-[0.5em] uppercase text-gold-light drop-shadow-[0_1px_4px_rgba(0,0,0,0.45)] mb-6 transition-all duration-1000 delay-300 ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
           >
             — ERKAN ÇELİK İNŞAAT & GAYRİMENKUL —
           </p>
 
           {/* Title */}
           <h1
-            className={`serif-headline text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-foreground leading-none mb-4 transition-all duration-1000 delay-500 ${
-              loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            }`}
+            className={`serif-headline text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-foreground leading-none mb-4 transition-all duration-1000 delay-500 ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              }`}
           >
-            Geleceğin Mimarı
+            Erkan Çelik İnşaat
             <br />
             <span className="gradient-text italic font-normal inline-block translate-y-2 drop-shadow-[0_1px_4px_rgba(0,0,0,0.35)]">
               Güvenin Adresi
@@ -89,25 +87,22 @@ export default function Index() {
 
           {/* Gold divider */}
           <div
-            className={`gold-divider w-32 mx-auto my-10 transition-all duration-1000 delay-700 ${
-              loaded ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"
-            }`}
+            className={`gold-divider w-32 mx-auto my-10 transition-all duration-1000 delay-700 ${loaded ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"
+              }`}
           />
 
           {/* Subtitle */}
           <p
-            className={`font-sans text-sm sm:text-base tracking-[0.15em] text-foreground/80 max-w-xl md:max-w-2xl mx-auto mb-12 uppercase transition-all duration-1000 delay-[900ms] ${
-              loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-            }`}
+            className={`font-sans text-sm sm:text-base tracking-[0.15em] text-foreground/80 max-w-xl md:max-w-2xl mx-auto mb-12 uppercase transition-all duration-1000 delay-[900ms] ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
           >
             Lüleburgaz'da en lüks, estetik ve sağlam yapıları inşa ediyoruz. Seçkin projelerimizle hayatınıza değer katın.
           </p>
 
           {/* CTA buttons */}
           <div
-            className={`flex flex-col sm:flex-row items-center justify-center gap-4 transition-all duration-1000 delay-[1100ms] ${
-              loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-            }`}
+            className={`flex flex-col sm:flex-row items-center justify-center gap-4 transition-all duration-1000 delay-[1100ms] ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
           >
             <a
               href="#projects"
@@ -141,9 +136,8 @@ export default function Index() {
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
           <div
-            className={`transition-all duration-1000 ${
-              aboutVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            }`}
+            className={`transition-all duration-1000 ${aboutVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              }`}
           >
             <p className="font-sans text-[10px] tracking-[0.5em] uppercase text-gold mb-4">— KURUmsal vizyon —</p>
             <h2 className="font-serif text-4xl sm:text-5xl font-light text-foreground mb-6">
@@ -153,7 +147,7 @@ export default function Index() {
             <div className="gold-divider w-24 mx-auto mb-10" />
 
             <p className="font-sans text-base sm:text-lg leading-relaxed text-muted-foreground max-w-3xl mx-auto mb-8">
-              Erkan Çelik İnşaat olarak, kurulduğumuz günden bu yana Lüleburgaz ve çevresinde sadece binalar değil, içinde mutlu hikayelerin birikeceği güvenli ve estetik yaşam alanları inşa ediyoruz. 
+              Erkan Çelik İnşaat olarak, kurulduğumuz günden bu yana Lüleburgaz ve çevresinde sadece binalar değil, içinde mutlu hikayelerin birikeceği güvenli ve estetik yaşam alanları inşa ediyoruz.
             </p>
             <p className="font-sans text-sm sm:text-base leading-relaxed text-muted-foreground/80 max-w-3xl mx-auto">
               A+ malzeme seçimimiz, yüksek işçilik standartlarımız ve modern mimari vizyonumuzla her projemizde mükemmelliği hedefliyoruz. Çevreye duyarlı, modern teknolojiyle entegre ve her detayı titizlikle düşünülmüş projelerimizle yatırımlarınıza değer katıyoruz.
@@ -186,9 +180,8 @@ export default function Index() {
         <div className="max-w-7xl mx-auto px-6">
           {/* Header */}
           <div
-            className={`text-center mb-20 transition-all duration-1000 ${
-              projectsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            }`}
+            className={`text-center mb-20 transition-all duration-1000 ${projectsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              }`}
           >
             <p className="font-sans text-[10px] tracking-[0.5em] uppercase text-gold mb-4">— PORTFÖYÜMÜZ —</p>
             <h2 className="font-serif text-5xl sm:text-6xl font-light text-foreground mb-6">
@@ -206,9 +199,8 @@ export default function Index() {
             {projects.map((project, i) => (
               <div
                 key={project.id}
-                className={`luxury-card flex flex-col group overflow-hidden border border-gold-dim/30 transition-all duration-1000 ${
-                  projectsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-                }`}
+                className={`luxury-card flex flex-col group overflow-hidden border border-gold-dim/30 transition-all duration-1000 ${projectsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+                  }`}
                 style={{ transitionDelay: `${i * 150}ms` }}
               >
                 {/* Image Container */}
@@ -220,7 +212,7 @@ export default function Index() {
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-80" />
-                  
+
                   {/* Badge */}
                   <div className="absolute top-4 left-4">
                     <span className="font-sans text-[9px] tracking-[0.2em] uppercase px-3 py-1.5 bg-gold text-primary-foreground font-semibold">
